@@ -19,16 +19,6 @@ namespace VenexaExchangeForm
             InitializeComponent();
         }
 
-        private void btCadastro_Click(object sender, EventArgs e)
-        {
-            c.ShowDialog();
-        }
-
-        private void PaginaInicial_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -37,6 +27,48 @@ namespace VenexaExchangeForm
         private void btAtivos_Click(object sender, EventArgs e)
         {
             b.ShowDialog();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult dialogResult = c.ShowDialog();
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void txtusuario_Click(object sender, EventArgs e)
+        {
+            Controle controle= new Controle();
+            controle.acessar(textBox3.Text, textBox4.Text);
+            if (controle.menssagem.Equals(""))
+            {
+
+            
+                if (controle.tem)
+                {
+                    MessageBox.Show("Logado com Sucesso", "Entrando", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Hide();
+                    Menu m = new Menu();
+                    m.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario não encontrado", "ERRO!", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show(controle.menssagem);
+            }
         }
     }
 }

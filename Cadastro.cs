@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -17,65 +18,35 @@ namespace VenexaExchangeForm
         {
             InitializeComponent();
         }
-
-        private void tbNome_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
+        private string menssagem;
 
         private void btProx_Click(object sender, EventArgs e)
         {
-            string nome = tbNome.Text;
-            string cpf_cnpj = tbCp.Text;
-            string localidade = tbLocalidade.Text;
-            string associacao = tbAssociacao.Text;
-
-            string value = "";
-            bool isChecked = rbFisica.Checked;
-            if (isChecked)
-                value = rbFisica.Text;
+            Controle controle = new Controle();
+            menssagem = controle.cadastrar(txtnome.Text, txtsenha.Text, txtconfirmarsenha.Text);
+            if (controle.tem)
+            {
+                MessageBox.Show(menssagem, "Cadastro", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             else
-                value = rbJuridica.Text;
-
-            if (value=="Pessoa física")
             {
-                Fisica f1 = new Fisica(nome, cpf_cnpj, localidade, associacao);
+                MessageBox.Show(menssagem);
             }
-            else if (value == "Pessoa jurídica")
-            {
-                Juridica j1 = new Juridica(nome, cpf_cnpj, localidade, associacao);
-            }
-
-
-            b.ShowDialog();
+            Close();
         }
+
 
         private void btCancel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
-        private void rbFisica_CheckedChanged(object sender, EventArgs e)
+        private void Cadastro_Load(object sender, EventArgs e)
         {
-             
+
         }
 
-        private void rbJuridica_CheckedChanged(object sender, EventArgs e)
+        private void txtsenha_TextChanged(object sender, EventArgs e)
         {
 
         }
